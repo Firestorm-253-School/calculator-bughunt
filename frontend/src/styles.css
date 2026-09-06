@@ -1,0 +1,93 @@
+:root {
+  --ink: #16202b;
+  --muted: #5d6b7a;
+  --paper: #fbfaf7;
+  --line: #d8d2c6;
+  --accent: #1f5f4f;
+  --alert: #a33124;
+  font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 4rem;
+}
+
+main { width: 100%; max-width: 30rem; }
+
+header h1 { font-size: 1.75rem; margin: 0 0 .25rem; letter-spacing: -.01em; }
+header p { color: var(--muted); margin: 0 0 2rem; font-size: .95rem; }
+
+.inputs { display: grid; gap: .75rem; grid-template-columns: 1fr 1fr; }
+label { display: grid; gap: .35rem; font-size: .8rem; color: var(--muted); }
+
+input {
+  font-size: 1.4rem;
+  padding: .6rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+input:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.operations { display: flex; gap: .5rem; margin: 1rem 0; }
+
+.op {
+  flex: 1;
+  font-size: 1.2rem;
+  padding: .6rem 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.op--active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.primary {
+  width: 100%;
+  font-size: 1rem;
+  padding: .75rem 0;
+  border: none;
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+}
+
+.primary:disabled { opacity: .5; cursor: progress; }
+
+.result {
+  display: block;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 2rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.error {
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  border-left: 4px solid var(--alert);
+  background: #fdf3f1;
+  color: var(--alert);
+  font-size: .9rem;
+}

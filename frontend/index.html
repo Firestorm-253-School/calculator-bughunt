@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taschenrechner</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Taschenrechner</h1>
+        <p>Zwei Zahlen, vier Grundrechenarten.</p>
+      </header>
+
+      <div class="inputs">
+        <label>
+          Erste Zahl
+          <input id="input-a" value="0" autocomplete="off" />
+        </label>
+        <label>
+          Zweite Zahl
+          <input id="input-b" value="0" autocomplete="off" />
+        </label>
+      </div>
+
+      <div class="operations" id="operations" role="group" aria-label="Operation">
+        <button type="button" class="op op--active" data-operation="add">+</button>
+        <button type="button" class="op" data-operation="subtract">&minus;</button>
+        <button type="button" class="op" data-operation="multiply">&times;</button>
+        <button type="button" class="op" data-operation="divide">&divide;</button>
+      </div>
+
+      <button type="button" id="calculate" class="primary">Berechnen</button>
+
+      <output id="result" class="result" hidden></output>
+      <p id="error" class="error" role="alert" hidden></p>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
