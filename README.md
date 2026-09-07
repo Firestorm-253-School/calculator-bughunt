@@ -68,9 +68,12 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | Teilweise Gefüllt [(+,1,2,3)] | \*       | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
 | Fehler bei rechnung []        | /        | 8      | 0      | [(/,8,0,"Division by Zero")] |
 
-| TF-ID | ANF-ID | Titel                                       | Testschritte                                                          | Erw. Ergebnis  |
-| ----- | ------ | ------------------------------------------- | --------------------------------------------------------------------- | -------------- |
-| TF-01 | ANF-08 | Liste befüllen prüfen ob aktualisiert wurde | add (10,20),Liste prüfen, Operation + Resultat einfügen, Liste Prüfen | item count + 1 |
+| TF-ID | ANF-ID | Titel                                       | Testschritte                                                                        | Erw. Ergebnis            |
+| ----- | ------ | ------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------ |
+| TF-01 | ANF-08 | Liste befüllen prüfen ob aktualisiert wurde | add (10,20),Liste prüfen, Operation + Resultat einfügen, Liste Prüfen               | item count + 1           |
+| TF-02 | ANF-09 | GET /history soll ganze history ausgeben    | mocked api fixture → api call get /history → vergleichen mit backend interner liste | equal lists              |
+| TF-03 | ANF-10 | Fehlermeldung anstelle des Resultats        | invalid-catchable operation ausführen → Result-status + value/msg                   | Result.Error + error-msg |
+| TF-04 | ANF-10 | Valide Rechnung →                           |
 
 ## Addieren
 
