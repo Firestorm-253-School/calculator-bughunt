@@ -45,10 +45,7 @@ GET  /api/operations
 POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 ```
 
-
-
 ## Anfoderungen
-
 
 | ANF-ID | Anforderung                                                                                                                                                  | Priorität |      |                                                                                                                                                             |                                                                                                                                                                                                |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,37 +60,29 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ANF-09 | Liste anzeigen / ausgeben via API endpoint                                                                                                                   |           |      |                                                                                                                                                             |                                                                                                                                                                                                |
 | ANF-10 | Fehlermeldung an der stelle des Resultats                                                                                                                    |           |      |                                                                                                                                                             |                                                                                                                                                                                                |
 
-
-
-
 ## Liste Letzte Berechnung
-
 
 | Zustand                       | Operator | Zahl 1 | Zahl 2 | Resultat                     |
 | ----------------------------- | -------- | ------ | ------ | ---------------------------- |
 | Leere Liste []                | +        | 1      | 2      | [(+,1,2,3)]                  |
-| Teilweise Gefüllt [(+,1,2,3)] | *        | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
+| Teilweise Gefüllt [(+,1,2,3)] | \*       | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
 | Fehler bei rechnung []        | /        | 8      | 0      | [(/,8,0,"Division by Zero")] |
 
-
-
+| TF-ID | ANF-ID | Titel                                       | Testschritte                                                          | Erw. Ergebnis  |
+| ----- | ------ | ------------------------------------------- | --------------------------------------------------------------------- | -------------- |
+| TF-01 | ANF-08 | Liste befüllen prüfen ob aktualisiert wurde | add (10,20),Liste prüfen, Operation + Resultat einfügen, Liste Prüfen | item count + 1 |
 
 ## Addieren
-
 
 | Äquivalenz Klassen | Bereich    | Vertreter       | Erwartung     |
 | ------------------ | ---------- | --------------- | ------------- |
 | gültig             | Zahlen     | 10/10           | 20            |
 | ungültig           | Buchstaben | a/10, 10/a, a/a | Fehlermeldung |
 
-
-
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
-
-
 
 | TF-ID | ANF-ID | Titel               | Testschritte                                  | Erw. Ergebnis |
 | ----- | ------ | ------------------- | --------------------------------------------- | ------------- |
@@ -101,25 +90,17 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-02 | ANF-05 | Buchstaben Addieren | add(a,10)                                     | Err           |
 | TF-03 | ANF-04 | Over-/Underflow     | add(10e1000, 10e1000) add(-10e1000, -10e1000) | Err           |
 
-
-
-
 ## Subtrahieren
-
 
 | Äquivalenz Klassen | Bereich    | Vertreter       | Erwartung     |
 | ------------------ | ---------- | --------------- | ------------- |
 | gültig             | Zahlen     | 10/10, -10/-10  | 0             |
 | ungültig           | Buchstaben | a/10, 10/a, a/a | Fehlermeldung |
 
-
-
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
-
-
 
 | TF-ID | ANF-ID | Titel                   | Testschritte                                 | Erw. Ergebnis |
 | ----- | ------ | ----------------------- | -------------------------------------------- | ------------- |
@@ -127,11 +108,7 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-05 | ANF-05 | Buchstaben Subtrahieren | sub(a,10)                                    | Err           |
 | TF-06 | ANF-04 | Over-/Underflow         | sub(10e1000, 10e1000) sub(-10e1000, 10e1000) | Err           |
 
-
-
-
 ## Dividieren
-
 
 | Äquivalenz Klassen | Bereich          | Vertreter       | Erwartung     |
 | ------------------ | ---------------- | --------------- | ------------- |
@@ -139,15 +116,11 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ungültig           | Buchstaben       | a/10, 10/a, a/a | Fehlermeldung |
 | ungültig           | Division durch 0 | 10/0            | Fehlermeldung |
 
-
-
 | Wert                              | Warum                |
 | --------------------------------- | -------------------- |
 | 0                                 | Division mit 0 = NaN |
 | 10e10000000000000000000000000000  | Overflow             |
 | -10e10000000000000000000000000000 | Underflow            |
-
-
 
 | TF-ID | ANF-ID | Titel                 | Testschritte                                    | Erw. Ergebnis |
 | ----- | ------ | --------------------- | ----------------------------------------------- | ------------- |
@@ -156,11 +129,7 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-09 | ANF-04 | Over-/Underflow       | div(10e1000, 10e-1000) div(-10e-1000, 10e-1000) | Err           |
 | TF-10 | ANF-03 | Division mit 0        | div(10, 0)                                      | Err           |
 
-
-
-
 ## Multiplizieren
-
 
 | Äquivalenz Klassen | Bereich        | Vertreter       | Erwartung     |
 | ------------------ | -------------- | --------------- | ------------- |
@@ -168,14 +137,10 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ungültig           | Buchstaben     | a/10, 10/a, a/a | Fehlermeldung |
 | gültig             | Multiplikation | 10/0, 0/10      | 0             |
 
-
-
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
-
-
 
 | TF-ID | ANF-ID | Titel           | Testschritte                                   | Erw. Ergebnis |
 | ----- | ------ | --------------- | ---------------------------------------------- | ------------- |
@@ -183,11 +148,7 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-12 | ANF-05 | Buchstaben Mult | mult(a,10)                                     | Err           |
 | TF-13 | ANF-04 | Over-/Underflow | mult(10e1000, 10e1000) mult(-10e1000, 10e1000) | Err           |
 
-
-
-
 ## Weiteres
-
 
 | TF-ID | ANF-ID | Titel                                  | Testschritte                               | Erw. Ergebnis    |
 | ----- | ------ | -------------------------------------- | ------------------------------------------ | ---------------- |
@@ -196,5 +157,3 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-16 | ANF-02 | Anzahl Operatoren 1                    | add(10)                                    | Err              |
 | TF-17 | ANF-06 | If Err → result empty                  | Err                                        | result = ""      |
 | TF-18 | ANF-07 | If API-Input invalid → Status 400 +msg | `{ "operation": "add", "a": 2, "b": "a" }` | Status 400 + msg |
-
-
