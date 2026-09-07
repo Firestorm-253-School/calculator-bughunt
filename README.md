@@ -45,7 +45,10 @@ GET  /api/operations
 POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 ```
 
+
+
 ## Anfoderungen
+
 
 | ANF-ID | Anforderung                                                                                                                                                  | Priorität |      |                                                                                                                                                             |                                                                                                                                                                                                |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -56,18 +59,41 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ANF-05 | Nicht-numerische Eingaben werden mit einer verständlichen Meldung abgelehnt. Die Applikation stürzt nicht ab.                                                | hoch      | 4min | API gibt ValueError: could not convert string to float: 'a' zurück wenn ich buchstaben eingebe                                                              | api.py 38-42 er versucht den wert zuerste zu einem float zu convertieren bevor er ihn bearbeitet dadurch bevor fehlermeldung zurück geworfen werden kann status code 500 Internal server error |
 | ANF-06 | Sobald eine Fehlermeldung erscheint, wird kein Ergebnis mehr angezeigt. Es darf nie gleichzeitig ein Ergebnis und eine Fehlermeldung sichtbar sein.          | mittel    | 1min | Alte ergebnise werden nicht gelöscht wenn ein fehler auftrat                                                                                                |                                                                                                                                                                                                |
 | ANF-07 | Die API antwortet bei ungültigen Eingaben mit dem Statuscode 400 und einer JSON-Fehlermeldung, nicht mit 500.                                                | hoch      | 1min | gibt bei string eingaben statuscode 500 zurück                                                                                                              |                                                                                                                                                                                                |
+| ANF-08 | Liste mit Berechnungen: {operation, a, b}                                                                                                                    | hoch      |      |                                                                                                                                                             |                                                                                                                                                                                                |
+| ANF-09 | Liste anzeigen / ausgeben via API endpoint                                                                                                                   |           |      |                                                                                                                                                             |                                                                                                                                                                                                |
+| ANF-10 | Fehlermeldung an der stelle des Resultats                                                                                                                    |           |      |                                                                                                                                                             |                                                                                                                                                                                                |
+
+
+
+
+## Liste Letzte Berechnung
+
+
+| Zustand                       | Operator | Zahl 1 | Zahl 2 | Resultat                     |
+| ----------------------------- | -------- | ------ | ------ | ---------------------------- |
+| Leere Liste []                | +        | 1      | 2      | [(+,1,2,3)]                  |
+| Teilweise Gefüllt [(+,1,2,3)] | *        | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
+| Fehler bei rechnung []        | /        | 8      | 0      | [(/,8,0,"Division by Zero")] |
+
+
+
 
 ## Addieren
+
 
 | Äquivalenz Klassen | Bereich    | Vertreter       | Erwartung     |
 | ------------------ | ---------- | --------------- | ------------- |
 | gültig             | Zahlen     | 10/10           | 20            |
 | ungültig           | Buchstaben | a/10, 10/a, a/a | Fehlermeldung |
 
+
+
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
+
+
 
 | TF-ID | ANF-ID | Titel               | Testschritte                                  | Erw. Ergebnis |
 | ----- | ------ | ------------------- | --------------------------------------------- | ------------- |
@@ -75,17 +101,25 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-02 | ANF-05 | Buchstaben Addieren | add(a,10)                                     | Err           |
 | TF-03 | ANF-04 | Over-/Underflow     | add(10e1000, 10e1000) add(-10e1000, -10e1000) | Err           |
 
+
+
+
 ## Subtrahieren
+
 
 | Äquivalenz Klassen | Bereich    | Vertreter       | Erwartung     |
 | ------------------ | ---------- | --------------- | ------------- |
 | gültig             | Zahlen     | 10/10, -10/-10  | 0             |
 | ungültig           | Buchstaben | a/10, 10/a, a/a | Fehlermeldung |
 
+
+
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
+
+
 
 | TF-ID | ANF-ID | Titel                   | Testschritte                                 | Erw. Ergebnis |
 | ----- | ------ | ----------------------- | -------------------------------------------- | ------------- |
@@ -93,7 +127,11 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-05 | ANF-05 | Buchstaben Subtrahieren | sub(a,10)                                    | Err           |
 | TF-06 | ANF-04 | Over-/Underflow         | sub(10e1000, 10e1000) sub(-10e1000, 10e1000) | Err           |
 
+
+
+
 ## Dividieren
+
 
 | Äquivalenz Klassen | Bereich          | Vertreter       | Erwartung     |
 | ------------------ | ---------------- | --------------- | ------------- |
@@ -101,11 +139,15 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ungültig           | Buchstaben       | a/10, 10/a, a/a | Fehlermeldung |
 | ungültig           | Division durch 0 | 10/0            | Fehlermeldung |
 
+
+
 | Wert                              | Warum                |
 | --------------------------------- | -------------------- |
 | 0                                 | Division mit 0 = NaN |
 | 10e10000000000000000000000000000  | Overflow             |
 | -10e10000000000000000000000000000 | Underflow            |
+
+
 
 | TF-ID | ANF-ID | Titel                 | Testschritte                                    | Erw. Ergebnis |
 | ----- | ------ | --------------------- | ----------------------------------------------- | ------------- |
@@ -114,7 +156,11 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-09 | ANF-04 | Over-/Underflow       | div(10e1000, 10e-1000) div(-10e-1000, 10e-1000) | Err           |
 | TF-10 | ANF-03 | Division mit 0        | div(10, 0)                                      | Err           |
 
+
+
+
 ## Multiplizieren
+
 
 | Äquivalenz Klassen | Bereich        | Vertreter       | Erwartung     |
 | ------------------ | -------------- | --------------- | ------------- |
@@ -122,10 +168,14 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | ungültig           | Buchstaben     | a/10, 10/a, a/a | Fehlermeldung |
 | gültig             | Multiplikation | 10/0, 0/10      | 0             |
 
+
+
 | Wert                              | Warum     |
 | --------------------------------- | --------- |
 | 10e10000000000000000000000000000  | Overflow  |
 | -10e10000000000000000000000000000 | Underflow |
+
+
 
 | TF-ID | ANF-ID | Titel           | Testschritte                                   | Erw. Ergebnis |
 | ----- | ------ | --------------- | ---------------------------------------------- | ------------- |
@@ -133,7 +183,11 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-12 | ANF-05 | Buchstaben Mult | mult(a,10)                                     | Err           |
 | TF-13 | ANF-04 | Over-/Underflow | mult(10e1000, 10e1000) mult(-10e1000, 10e1000) | Err           |
 
+
+
+
 ## Weiteres
+
 
 | TF-ID | ANF-ID | Titel                                  | Testschritte                               | Erw. Ergebnis    |
 | ----- | ------ | -------------------------------------- | ------------------------------------------ | ---------------- |
@@ -143,6 +197,4 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | TF-17 | ANF-06 | If Err → result empty                  | Err                                        | result = ""      |
 | TF-18 | ANF-07 | If API-Input invalid → Status 400 +msg | `{ "operation": "add", "a": 2, "b": "a" }` | Status 400 + msg |
 
-Liste mit Berechnungen: {operation, a, b}
-Liste anzeigen / ausgeben via API endpoint
-bei operation liste ergänzen
+
