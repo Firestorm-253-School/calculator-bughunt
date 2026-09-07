@@ -17,4 +17,4 @@ class CalculatorService:
         return result
 
     def append_history(self, entry: tuple[str, float, float, float]) -> None:
-        pass
+        self.history.append(entry)
