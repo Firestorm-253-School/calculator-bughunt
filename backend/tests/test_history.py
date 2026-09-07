@@ -1,4 +1,5 @@
-from app.calculator import add
+from ..app.calculator import add
+from ..app.service import CalculatorService
 
 def test_append_history():
   service = CalculatorService()
