@@ -38,7 +38,7 @@ def calculate_endpoint():
     try:
         a = float(payload["a"])
         b = float(payload["b"])
-    except (KeyError, TypeError, ValueError):
+    except (KeyError, TypeError):
         return jsonify(error="Felder 'a' und 'b' muessen Zahlen sein"), 400
 
     try:
