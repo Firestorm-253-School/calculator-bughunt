@@ -14,11 +14,11 @@ def subtract(a: float, b: float) -> float:
 
 
 def multiply(a: float, b: float) -> float:
-    return a ** b
+    return a * b
 
 
 def divide(a: float, b: float) -> float:
-    if b == 0 and a == 0:
+    if b == 0 or a == 0:
         raise CalculationError("Division durch Null ist nicht definiert")
     return a / b
 
