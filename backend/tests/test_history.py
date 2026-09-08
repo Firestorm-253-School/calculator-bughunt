@@ -15,4 +15,4 @@ def test_append_history(): # TF-01
   assert len(listafter) == len(listbefore) + 1
   assert listafter[-1] == entry
   
-  
+
