@@ -33,11 +33,11 @@ def test_mult():
 
 
 def test_weiteres():
-    with pytest.raises(TypeError): # TF-13
+    with pytest.raises(TypeError): # TF-14
         add(10, 10, 10)
 
-    assert add(10, 10) == 20 # TF-14
+    assert add(10, 10) == 20 # TF-15
 
-    with pytest.raises(TypeError): # TF-15
+    with pytest.raises(TypeError): # TF-16
         add(10)
 

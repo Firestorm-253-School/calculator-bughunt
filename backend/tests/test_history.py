@@ -1,7 +1,7 @@
 from ..app.calculator import add
 from ..app.service import CalculatorService
 
-def test_append_history(): # TF-01
+def test_append_history(): # TF-19
   service = CalculatorService()
 
   listbefore = list(service.history)
