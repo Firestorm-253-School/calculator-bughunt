@@ -293,24 +293,37 @@ Die Response lautet:
 
 ## Testdurchlauf 1
 
-| TF-ID | Test                | Erwartetes Ergebnis | Tatsächliches Ergebnis  | Status             | Datum      |
-| ----- | ------------------- | ------------------- | ----------------------- | ------------------ | ---------- |
-| TF-01 | Division durch 0    | Fehlermeldung       | Fehlermeldung erscheint | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-02 | Wert unter Minimum  | Fehlermeldung       | Fehlermeldung erscheint | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-03 | Wert über Maximum   | Fehlermeldung       | Fehlermeldung erscheint | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-04 | Addition            | `1'000'000'000'001` | `1'000'000'000'001`     | ✅ Bestanden       | 08.09.2026 |
-| TF-05 | Subtraktion         | `-999999999999`     | `-999999999999`         | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-06 | Multiplikation      | `200`               | `200`                   | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-07 | Nicht-numerisch     | Fehlermeldung       | Fehlermeldung erscheint | ❌ Nicht Bestanden | 08.09.2026 |
-| TF-08 | Ungültige Operation | Fehlermeldung       | Fehlermeldung erscheint | ✅ Bestanden       | 08.09.2026 |
+| TF-ID | Test                | Erwartetes Ergebnis  | Tatsächliches Ergebnis               | Status             | Datum      |
+| ----- | ------------------- | -------------------- | ------------------------------------ | ------------------ | ---------- |
+| TF-01 | Division durch 0    | Fehlermeldung        | API crashed                          | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-02 | Wert unter Minimum  | Fehlermeldung        | Rechnung wird trotz limit ausgeführt | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-03 | Wert über Maximum   | Fehlermeldung        | Rechnung wird trotz limit ausgeführt | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-04 | Addition            | `1'000'000'000'001`  | `1'000'000'000'001`                  | ✅ Bestanden       | 08.09.2026 |
+| TF-05 | Subtraktion         | `-1'000'000'000'001` | `1'000'000'000'001`                  | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-06 | Multiplikation      | `200`                | `10'240'000'000'000`                 | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-07 | Nicht-numerisch     | Fehlermeldung        | API crashed                          | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-08 | Ungültige Operation | Fehlermeldung        | Fehlermeldung erscheint              | ✅ Bestanden       | 08.09.2026 |
+
+## Testdurchlauf 2
+
+| TF-ID | Test                | Erwartetes Ergebnis  | Tatsächliches Ergebnis               | Status             | Datum      |
+| ----- | ------------------- | -------------------- | ------------------------------------ | ------------------ | ---------- |
+| TF-01 | Division durch 0    | Fehlermeldung        | API crashed                          | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-02 | Wert unter Minimum  | Fehlermeldung        | Rechnung wird trotz limit ausgeführt | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-03 | Wert über Maximum   | Fehlermeldung        | Rechnung wird trotz limit ausgeführt | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-04 | Addition            | `1'000'000'000'001`  | `1'000'000'000'001`                  | ✅ Bestanden       | 08.09.2026 |
+| TF-05 | Subtraktion         | `-1'000'000'000'001` | `-1'000'000'000'001`                 | ✅ Bestanden       | 08.09.2026 |
+| TF-06 | Multiplikation      | `200`                | `200`                                | ✅ Bestanden       | 08.09.2026 |
+| TF-07 | Nicht-numerisch     | Fehlermeldung        | API crashed                          | ❌ Nicht Bestanden | 08.09.2026 |
+| TF-08 | Ungültige Operation | Fehlermeldung        | Fehlermeldung erscheint              | ✅ Bestanden       | 08.09.2026 |
 
 ## Mängelliste - TD-01
 
-| Mangel-ID | TF-ID | Beschreibung                                      | Klasse | Status |
-| --------- | ----- | ------------------------------------------------- | ------ | ------ |
-| M-01      | TF-01 | Division durch 0 wirft keine Fehlermeldung        | 3      | Offen  |
-| M-02      | TF-02 | Wert unter Minimum akzeptiert                     | 4      | Offen  |
-| M-03      | TF-03 | Wert über Maximum akzeptiert                      | 4      | Offen  |
-| M-04      | TF-05 | Subtraktion liefert falsches Ergebnis             | 1      | Offen  |
-| M-05      | TF-06 | Multiplikation liefert falsches Ergebnis          | 1      | Offen  |
-| M-06      | TF-07 | Nicht numerische werte werfen keine Fehlermeldung | 2      | Offen  |
+| Mangel-ID | TF-ID | Beschreibung                                      | Klasse | Status  |
+| --------- | ----- | ------------------------------------------------- | ------ | ------- |
+| M-01      | TF-01 | Division durch 0 wirft keine Fehlermeldung        | 3      | Offen   |
+| M-02      | TF-02 | Wert unter Minimum akzeptiert                     | 4      | Offen   |
+| M-03      | TF-03 | Wert über Maximum akzeptiert                      | 4      | Offen   |
+| M-04      | TF-05 | Subtraktion liefert falsches Ergebnis             | 1      | Behoben |
+| M-05      | TF-06 | Multiplikation liefert falsches Ergebnis          | 1      | Behoben |
+| M-06      | TF-07 | Nicht numerische werte werfen keine Fehlermeldung | 2      | Offen   |
