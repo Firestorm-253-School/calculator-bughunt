@@ -68,7 +68,7 @@ POST /api/calculate     Body: {"operation": "add", "a": 2, "b": 3}
 | Zustand                       | Operator | Zahl 1 | Zahl 2 | Resultat                     |
 | ----------------------------- | -------- | ------ | ------ | ---------------------------- |
 | Leere Liste []                | +        | 1      | 2      | [(+,1,2,3)]                  |
-| Teilweise Gefüllt [(+,1,2,3)] |          | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
+| Teilweise Gefüllt [(+,1,2,3)] | *        | 2      | 2      | [(+,1,2,3)(*,2,2,4)]         |
 | Fehler bei rechnung []        | /        | 8      | 0      | [(/,8,0,"Division by Zero")] |
 
 
