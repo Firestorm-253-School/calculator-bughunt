@@ -1,5 +1,5 @@
 import pytest
-from ..app.calculator import add, subtract, divide, multiply
+from ..app.calculator import add, subtract, divide, multiply, CalculationError
 
 def test_add():
     assert add(10, 10) == 20 # TF-01
@@ -21,7 +21,7 @@ def test_div():
     with pytest.raises(TypeError): # TF-08
         divide("a", 10)
 
-    with pytest.raises(ZeroDivisionError): # TF-10
+    with pytest.raises(CalculationError): # TF-10
         divide(10, 0)
 
 
